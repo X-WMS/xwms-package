@@ -20,7 +20,7 @@
       "jenssegers/agent": "^2.6",
 
       "laravel/fortify": "^1.24",
-      "laravel/framework": "^11.9",
+      "laravel/framework": ">=11.0",
       "laravel/sanctum": "^4.0",
       "laravel/socialite": "^5.18",
       "laravel/tinker": "^2.9",
