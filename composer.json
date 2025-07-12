@@ -1,7 +1,8 @@
 {
-  "name": "laravelshared/core",
+ "name": "xwmsshared/core",
   "description": "Herbruikbare middleware, services en helpers voor Laravel projecten van xwms",
   "type": "library",
+  "license": "MIT",
   "autoload": {
     "psr-4": {
       "LaravelShared\\Core\\": "src/"
