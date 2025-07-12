@@ -1,0 +1,13 @@
+.form-input-select .dropdown-menu{
+    background-color: #0f0f17;
+}
+
+.form-input-select .dropdown-option.selected{
+    background-color: #11111b;
+}
+
+.form-input-select .dropdown-option:hover{
+    background-color: #222242 !important;
+    color: white;
+    cursor: pointer;
+}

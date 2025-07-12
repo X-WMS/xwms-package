@@ -1,0 +1,53 @@
+{
+  "name": "laravelshared/core",
+  "description": "Herbruikbare middleware, services en helpers voor Laravel projecten van xwms",
+  "type": "library",
+  "autoload": {
+    "psr-4": {
+      "LaravelShared\\Core\\": "src/"
+    },
+    "files": [
+      "src/Helpers/functions.php"
+    ]
+  },
+  "require": {
+      "php": "^8.2",
+    
+      "bacon/bacon-qr-code": "^3.0",
+      "barryvdh/laravel-dompdf": "^3.0",
+      "james-heinrich/getid3": "^1.9",
+      "jenssegers/agent": "^2.6",
+
+      "laravel/fortify": "^1.24",
+      "laravel/framework": "^11.9",
+      "laravel/sanctum": "^4.0",
+      "laravel/socialite": "^5.18",
+      "laravel/tinker": "^2.9",
+      "laravelshared/core": "dev-main",
+
+      "livewire/livewire": "^3.5",
+      "owen-it/laravel-auditing": "^13.6",
+      "phpmailer/phpmailer": "^6.9",
+      "pusher/pusher-php-server": "^7.2",
+
+      "google/cloud-translate": "1.12",
+      "league/oauth2-google": "^4.0",
+      "pragmarx/google2fa": "^8.0",
+
+      "socialiteproviders/google": "^4.1",
+      "socialiteproviders/manager": "^4.8",
+      "socialiteproviders/microsoft": "^4.6",
+
+      "spatie/browsershot": "^5.0",
+      "spatie/laravel-activitylog": "^4.9",
+      "spatie/laravel-analytics": "^5.4",
+      "spatie/laravel-permission": "^6.9",
+      "stevebauman/location": "^7.4",
+      "thenetworg/oauth2-azure": "^2.2",
+      
+      "intervention/image": "^3.11",
+      "spatie/laravel-image-optimizer": "^1.8"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
