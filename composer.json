@@ -13,7 +13,7 @@
   },
   "require": {
     "php": "^8.2",
-    "laravel/framework": ">=11.0 <13.0"
+    "laravel/framework": ">=11.0"
   },
   "suggest": {
     "barryvdh/laravel-dompdf": "PDF generatie",
@@ -25,7 +25,6 @@
     "laravel/socialite": "Social login integratie",
     "laravel/tinker": "Tinker CLI voor debugging",
     "livewire/livewire": "Livewire frontend support",
-    "owen-it/laravel-auditing": "Model auditing logs",
     "phpmailer/phpmailer": "Email via SMTP",
     "pusher/pusher-php-server": "Realtime via Pusher",
     "google/cloud-translate": "Google Translate API",
