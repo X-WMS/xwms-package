@@ -24,7 +24,6 @@
       "laravel/sanctum": "^4.0",
       "laravel/socialite": "^5.18",
       "laravel/tinker": "^2.9",
-      "laravelshared/core": "dev-main",
 
       "livewire/livewire": "^3.5",
       "owen-it/laravel-auditing": "^13.6",
