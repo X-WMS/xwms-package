@@ -28,11 +28,11 @@ class LangController extends Controller
     
             if ($isDefault === true) {
                 $ipData = IpService::getIpAdr();
-                $lang = strtolower($ipData['countrycode'] ?? config("xwms.locale.default")); // Zet naar kleine letters
+                $lang = strtolower($ipData['countrycode'] ?? config("xwms.locale.default", "en")); // Zet naar kleine letters
             }
         
-            if (!in_array($lang, config("xwms.locale.locales"))) {
-                $lang = config("xwms.locale.default");
+            if (!in_array($lang, config("xwms.locale.locales", ["en"]))) {
+                $lang = config("xwms.locale.default", "en");
             }
     
             App::setLocale($lang);

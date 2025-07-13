@@ -15,6 +15,6 @@ return [
     ],
 
     "google" => [
-        "MapsApiKey" => env('GOOGLE_MAPS_API_KEY')
+        "MapsApiKey" => env('GOOGLE_MAPS_API_KEY', null)
     ]
 ];

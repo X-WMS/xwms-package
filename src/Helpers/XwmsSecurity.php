@@ -14,6 +14,9 @@ class XwmsSecurity
     private static array $memoryNonces = [];
     private static function getKey(): string
     {
+        if (!config("xwms.client_key")){
+            throw new Exception("Client Key is required");
+        }
         return hash('sha256', config("xwms.client_key"));
     }
 

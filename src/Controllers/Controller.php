@@ -177,7 +177,19 @@ abstract class Controller
 
     protected function getLocationFromGoogle(string $postalcode, string $housenumber): array
     {
-        $apiKey = config("xwms.google.MapsApiKey"); // Zorg dat de API-key in .env staat
+        $apiKey = config("xwms.google.MapsApiKey", null); // Zorg dat de API-key in .env staat
+        if (!$apiKey) return [
+            'streetName' => 'N/A',
+            'countryShortName' => 'N/A',
+            'postalCode' => 'N/A',
+            'streetNumber' => 'N/A',
+            'city' => 'N/A',
+            'countryLongName' => 'N/A',
+            'coordinates' => [
+                'lat' => 'N/A',
+                'lng' => 'N/A'
+            ]
+        ];;
 
         // Maak het adres correct op
         $address = urlencode("$postalcode $housenumber");

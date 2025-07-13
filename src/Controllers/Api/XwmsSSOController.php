@@ -70,7 +70,7 @@ class XwmsSSOController extends Controller
             'return' => true
         ]);
 
-        return $this->handleSafeRedirectOrReturn($result, config("xwms.sign.fallbackUrl"));
+        return $this->handleSafeRedirectOrReturn($result, config("xwms.sign.fallbackUrl", "/"));
     }
 
     protected function handleSafeRedirectOrReturn($result, $fallbackUri)
