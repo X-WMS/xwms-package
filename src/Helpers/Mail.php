@@ -23,6 +23,7 @@ class Mail
 
             // 📩 HTML renderen
             $view = $data['template'] ?? 'xwms-verification';
+            $view = "mail.".$view;
             $html = view($view, ['data' => $data])->render();
 
             $mail->isHTML(true);
