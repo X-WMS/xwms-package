@@ -2,7 +2,7 @@
 
 namespace LaravelShared\Core\Helpers;
 
-use LaravelShared\Core\Models\CodeVerification as LCodeVerification;
+use LaravelShared\Core\Models\CodeVerification;
 use LaravelShared\Core\Services\IpService;
 use Exception;
 
@@ -18,23 +18,15 @@ class VerificationHelper
         ];
     }
 
-    protected static function getModel(): string
-    {
-        return class_exists(\App\Models\CodeVerification::class)
-            ? \App\Models\CodeVerification::class
-            : LCodeVerification::class;
-    }
-
     /**
      * Genereer en sla een nieuwe verificatiecode op.
      */
-    public static function send(int|string|null $userId, string $category, ?string $email = null, int $validMinutes = 5): mixed
+    public static function send(int|string|null $userId, string $category, ?string $email = null, int $validMinutes = 5): CodeVerification
     {
-        $model = self::getModel();
         $base = self::getVerificationBase($userId);
 
         // Verwijder vorige 'pending' codes van dit type
-        $query = $model::where('category', $category)
+        $query = CodeVerification::where('category', $category)
             ->where('status', 'pending');
 
         if (!empty($base['user_id'])) {
@@ -49,7 +41,7 @@ class VerificationHelper
         $query->delete();
         $code = random_int(100000, 999999);
 
-        return $model::create(array_merge($base, [
+        return CodeVerification::create(array_merge($base, [
             'category' => $category,
             'status' => 'pending',
             'code' => $code,
@@ -63,12 +55,11 @@ class VerificationHelper
     /**
      * Verifieer een code voor een gebruiker.
      */
-    public static function verify(int|string|null $userId, string $category, string $inputCode, int $rateLimitSeconds = 5, int $maxAttempts = 5): mixed
+    public static function verify(int|string|null $userId, string $category, string $inputCode, int $rateLimitSeconds = 5, int $maxAttempts = 5): CodeVerification
     {
-        $model = self::getModel();
         $base = self::getVerificationBase($userId);
 
-        $query = $model::where('category', $category)
+        $query = CodeVerification::where('category', $category)
             ->where('status', 'pending');
 
         if (!empty($base['user_id'])) {
@@ -121,12 +112,11 @@ class VerificationHelper
         return $codeEntry;
     }
 
-    public static function getLatestCompletedVerification(int|string|null $userId, string $category): mixed
+    public static function getLatestCompletedVerification(int|string|null $userId, string $category): ?CodeVerification
     {
-        $model = self::getModel();
         $base = self::getVerificationBase($userId);
 
-        $query = $model::where('category', $category)
+        $query = CodeVerification::where('category', $category)
             ->where('status', 'used');
 
         if (!empty($base['user_id'])) {
@@ -151,7 +141,7 @@ class VerificationHelper
     }
 
 
-    public static function requireFreshVerification(int|string|null $userId, string $category, ?string $email = null, int $validMinutes = 5, int $unlockSeconds = 300): mixed
+    public static function requireFreshVerification(int|string|null $userId, string $category, ?string $email = null, int $validMinutes = 5, int $unlockSeconds = 300): true|CodeVerification
     {
         if (self::isTemporarilyUnlocked($userId, $category, $unlockSeconds)) {
             return true;
@@ -174,10 +164,9 @@ class VerificationHelper
      */
     public static function getTemporaryUnlockRemainingSeconds(int|string|null $userId, string $category, int $seconds = 300): int
     {
-        $model = self::getModel();
         $base = self::getVerificationBase($userId);
 
-        $query = $model::where('category', $category)
+        $query = CodeVerification::where('category', $category)
             ->where('status', 'used');
 
         if (!empty($base['user_id'])) {
