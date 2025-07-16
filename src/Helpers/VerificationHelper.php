@@ -2,18 +2,18 @@
 
 namespace LaravelShared\Core\Helpers;
 
-use App\Models\CodeVerification;
+use LaravelShared\Core\Models\CodeVerification;
 use LaravelShared\Core\Services\IpService;
 use Exception;
 
 class VerificationHelper
 {
-    protected static function getVerificationBase(int|string|null $xwmsId = null): array
+    protected static function getVerificationBase(int|string|null $userId = null): array
     {
         $ipData = IpService::getIpAdr();
 
         return [
-            'xwms_id' => is_numeric($xwmsId) ? $xwmsId : null,
+            'user_id' => is_numeric($userId) ? $userId : null,
             'ip' => $ipData['ipaddress'] ?? 'unknown',
         ];
     }
@@ -21,17 +21,17 @@ class VerificationHelper
     /**
      * Genereer en sla een nieuwe verificatiecode op.
      */
-    public static function send(int|string|null $xwmsId, string $category, ?string $email = null, int $validMinutes = 5): CodeVerification
+    public static function send(int|string|null $userId, string $category, ?string $email = null, int $validMinutes = 5): CodeVerification
     {
-        $base = self::getVerificationBase($xwmsId);
+        $base = self::getVerificationBase($userId);
 
         // Verwijder vorige 'pending' codes van dit type
         $query = CodeVerification::where('category', $category)
             ->where('status', 'pending');
 
-        if (!empty($base['xwms_id'])) {
-            $query->whereRaw('(xwms_id = ? OR ip = ?)', [
-                $base['xwms_id'],
+        if (!empty($base['user_id'])) {
+            $query->whereRaw('(user_id = ? OR ip = ?)', [
+                $base['user_id'],
                 $base['ip']
             ]);
         } else {
@@ -55,16 +55,16 @@ class VerificationHelper
     /**
      * Verifieer een code voor een gebruiker.
      */
-    public static function verify(int|string|null $xwmsId, string $category, string $inputCode, int $rateLimitSeconds = 5, int $maxAttempts = 5): CodeVerification
+    public static function verify(int|string|null $userId, string $category, string $inputCode, int $rateLimitSeconds = 5, int $maxAttempts = 5): CodeVerification
     {
-        $base = self::getVerificationBase($xwmsId);
+        $base = self::getVerificationBase($userId);
 
         $query = CodeVerification::where('category', $category)
             ->where('status', 'pending');
 
-        if (!empty($base['xwms_id'])) {
-            $query->whereRaw('(xwms_id = ? OR ip = ?)', [
-                $base['xwms_id'],
+        if (!empty($base['user_id'])) {
+            $query->whereRaw('(user_id = ? OR ip = ?)', [
+                $base['user_id'],
                 $base['ip']
             ]);
         } else {
@@ -112,16 +112,16 @@ class VerificationHelper
         return $codeEntry;
     }
 
-    public static function getLatestCompletedVerification(int|string|null $xwmsId, string $category): ?CodeVerification
+    public static function getLatestCompletedVerification(int|string|null $userId, string $category): ?CodeVerification
     {
-        $base = self::getVerificationBase($xwmsId);
+        $base = self::getVerificationBase($userId);
 
         $query = CodeVerification::where('category', $category)
             ->where('status', 'used');
 
-        if (!empty($base['xwms_id'])) {
-            $query->whereRaw('(xwms_id = ? OR ip = ?)', [
-                $base['xwms_id'],
+        if (!empty($base['user_id'])) {
+            $query->whereRaw('(user_id = ? OR ip = ?)', [
+                $base['user_id'],
                 $base['ip']
             ]);
         } else {
@@ -131,9 +131,9 @@ class VerificationHelper
         return $query->latest('completed_at')->first();
     }
 
-    public static function isTemporarilyUnlocked(int|string|null $xwmsId, string $category, int $seconds = 300): bool
+    public static function isTemporarilyUnlocked(int|string|null $userId, string $category, int $seconds = 300): bool
     {
-        $latest = self::getLatestCompletedVerification($xwmsId, $category);
+        $latest = self::getLatestCompletedVerification($userId, $category);
 
         return $latest &&
             $latest->completed_at &&
@@ -141,13 +141,13 @@ class VerificationHelper
     }
 
 
-    public static function requireFreshVerification(int|string|null $xwmsId, string $category, ?string $email = null, int $validMinutes = 5, int $unlockSeconds = 300): true|CodeVerification
+    public static function requireFreshVerification(int|string|null $userId, string $category, ?string $email = null, int $validMinutes = 5, int $unlockSeconds = 300): true|CodeVerification
     {
-        if (self::isTemporarilyUnlocked($xwmsId, $category, $unlockSeconds)) {
+        if (self::isTemporarilyUnlocked($userId, $category, $unlockSeconds)) {
             return true;
         }
 
-        $verification = self::send($xwmsId, $category, $email, $validMinutes);
+        $verification = self::send($userId, $category, $email, $validMinutes);
         Mail::sendVerificationCode($email, $verification->code, [
             'smtp_profile' => 'mailfi',
             'subject' => 'Unlock your account',
@@ -162,16 +162,16 @@ class VerificationHelper
     /**
      * Haal het aantal seconden op dat nog over is van een tijdelijke unlock.
      */
-    public static function getTemporaryUnlockRemainingSeconds(int|string|null $xwmsId, string $category, int $seconds = 300): int
+    public static function getTemporaryUnlockRemainingSeconds(int|string|null $userId, string $category, int $seconds = 300): int
     {
-        $base = self::getVerificationBase($xwmsId);
+        $base = self::getVerificationBase($userId);
 
         $query = CodeVerification::where('category', $category)
             ->where('status', 'used');
 
-        if (!empty($base['xwms_id'])) {
-            $query->whereRaw('(xwms_id = ? OR ip = ?)', [
-                $base['xwms_id'],
+        if (!empty($base['user_id'])) {
+            $query->whereRaw('(user_id = ? OR ip = ?)', [
+                $base['user_id'],
                 $base['ip']
             ]);
         } else {

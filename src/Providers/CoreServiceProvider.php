@@ -43,47 +43,47 @@ class CoreServiceProvider extends ServiceProvider
         // Migrations
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
-        if ($this->app->environment('local')) {
-            Artisan::call('vendor:publish', [
-                '--provider' => "LaravelShared\\Core\\Providers\\CoreServiceProvider",
-                '--force' => true
-            ]);
+        // if ($this->app->environment('local')) {
+        //     Artisan::call('vendor:publish', [
+        //         '--provider' => "LaravelShared\\Core\\Providers\\CoreServiceProvider",
+        //         '--force' => true
+        //     ]);
 
-            $this->cleanupStaleFiles([
-                [
-                    'from' => __DIR__.'/../resources/assets/css',
-                    'to'   => resource_path('core/css'),
-                ],
-                [
-                    'from' => __DIR__.'/../resources/assets/scss',
-                    'to'   => resource_path('core/scss'),
-                ],
-                [
-                    'from' => __DIR__.'/../resources/assets/js',
-                    'to'   => resource_path('core/js'),
-                ],
-                [
-                    'from' => __DIR__.'/../resources/assets/packages',
-                    'to'   => resource_path('core/packages'),
-                ],
-                [
-                    'from' => __DIR__.'/../resources/lang',
-                    'to'   => resource_path('core/lang'),
-                ],
-                [
-                    'from' => __DIR__.'/../resources/views',
-                    'to'   => resource_path('views/core'),
-                ],
-                [
-                    'from' => __DIR__.'/../routes',
-                    'to'   => base_path('routes/core'),
-                ],
-            ]);
+        //     $this->cleanupStaleFiles([
+        //         [
+        //             'from' => __DIR__.'/../resources/assets/css',
+        //             'to'   => resource_path('core/css'),
+        //         ],
+        //         [
+        //             'from' => __DIR__.'/../resources/assets/scss',
+        //             'to'   => resource_path('core/scss'),
+        //         ],
+        //         [
+        //             'from' => __DIR__.'/../resources/assets/js',
+        //             'to'   => resource_path('core/js'),
+        //         ],
+        //         [
+        //             'from' => __DIR__.'/../resources/assets/packages',
+        //             'to'   => resource_path('core/packages'),
+        //         ],
+        //         [
+        //             'from' => __DIR__.'/../resources/lang',
+        //             'to'   => resource_path('core/lang'),
+        //         ],
+        //         [
+        //             'from' => __DIR__.'/../resources/views',
+        //             'to'   => resource_path('views/core'),
+        //         ],
+        //         [
+        //             'from' => __DIR__.'/../routes',
+        //             'to'   => base_path('routes/core'),
+        //         ],
+        //     ]);
 
-            if (!File::exists(public_path('build/manifest.json'))) {
-                exec('npm run build');
-            }
-        }        
+        //     if (!File::exists(public_path('build/manifest.json'))) {
+        //         exec('npm run build');
+        //     }
+        // }        
     }
 
     protected function cleanupStaleFiles(array $paths)
