@@ -52,7 +52,7 @@ class Mail
     {
         $options = is_array($options) ? $options : ['username' => $options];
         $data = array_merge([
-            'template' => 'auth.verification',
+            'template' => 'xwms-verification',
             'subject' => $options['subject'] ?? 'XWMS Verification Code',
             'verificationCode' => $code,
         ], $options);
