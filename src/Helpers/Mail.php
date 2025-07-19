@@ -45,7 +45,7 @@ class Mail
             'username' => env('MAIL_USERNAME'),
             'password' => env('MAIL_PASSWORD'),
             'port' => env('MAIL_PORT'),
-            'secure' => PHPMailer::ENCRYPTION_STARTTLS
+            'secure' => PHPMailer::ENCRYPTION_SMTPS
         ];
     }
 
@@ -68,7 +68,7 @@ class Mail
         $mail->SMTPAuth   = $smtp['auth'] ?? true;
         $mail->Username   = $smtp['username'] ?? env('MAIL_USERNAME');
         $mail->Password   = $smtp['password'] ?? env('MAIL_PASSWORD');
-        $mail->SMTPSecure = $smtp['secure'] ?? PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->SMTPSecure = $smtp['secure'] ?? PHPMailer::ENCRYPTION_SMTPS;
         $mail->Port       = $smtp['port'] ?? env('MAIL_PORT');
     }
 

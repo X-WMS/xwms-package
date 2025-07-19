@@ -86,7 +86,7 @@ abstract class Controller
 
         // ⛔️ Gevoelige fout tenzij anders bepaald
         $isFromApp = str_starts_with($file, base_path('app'));
-        $isFromYourPackage = str_contains($file, base_path('vendor/westz/laravel-xwms-secure'));
+        $isFromYourPackage = str_contains($file, base_path('vendor/xwmsshared/core/src'));
 
         $nonSensitiveExceptions = [
             \Illuminate\Validation\ValidationException::class,
