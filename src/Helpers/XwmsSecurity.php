@@ -10,7 +10,6 @@ use Exception;
 
 class XwmsSecurity
 {
-    private string $xwms_api = "10.66.66.2";
     private static array $memoryNonces = [];
     private static function getKey(): string
     {

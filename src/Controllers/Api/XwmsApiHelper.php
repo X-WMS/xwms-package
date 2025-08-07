@@ -1,0 +1,66 @@
+<?php
+
+namespace LaravelShared\Core\Controllers\Api;
+
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
+
+class XwmsApiHelper
+{
+    private static string $clientId;
+    private static string $clientSecret;
+    private static Client $httpClient;
+    private static string $baseUri = 'https://xwms.nl/api/';
+
+    public static function setup(): void
+    {
+        self::$clientId = config("xwms.client_id", env("XWMS_CLIENT_ID"));
+        self::$clientSecret = config("xwms.client_secret", env("XWMS_CLIENT_SECRET"));
+        self::$httpClient = new Client([
+            'base_uri' => self::$baseUri,
+            'timeout'  => 10,
+        ]);
+    }
+
+    protected static function postToEndpoint(string $endpoint, array $payload): array
+    {
+        if (!self::$httpClient || !self::$clientId || !self::$clientSecret) {
+            throw new \Exception('XwmsApiHelper not initialized. Make sure ENV XWMS_CLIENT_ID and XWMS_CLIENT_SECRET are set.');
+        }
+
+        try {
+            $response = self::$httpClient->post($endpoint, [
+                'headers' => [
+                    'X-Client-Id' => self::$clientId,
+                    'X-Client-Secret' => self::$clientSecret,
+                    'Accept' => 'application/json',
+                ],
+                'json' => $payload,
+            ]);
+
+            $json = json_decode((string) $response->getBody(), true);
+
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                throw new \Exception("Invalid JSON response");
+            }
+
+            return $json;
+        } catch (RequestException $e) {
+            $msg = $e->hasResponse() ? (string) $e->getResponse()->getBody() : $e->getMessage();
+            throw new \Exception("API request to {$endpoint} failed: " . $msg);
+        }
+    }
+
+    public static function authenticateUser(array $data = []): array
+    {
+        self::setup();
+        return self::postToEndpoint("sign-token", $data);
+    }
+
+    public static function getAuthenticateUser(array $data = []): array
+    {
+        self::setup();
+        $token = request('token');
+        return self::postToEndpoint("sign-token-verify", array_merge(['token' => $token], $data));
+    }
+}

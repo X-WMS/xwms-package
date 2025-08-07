@@ -11,15 +11,9 @@ class UserMigration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('username');
+            $table->string('name');
             $table->string('email');
             $table->string('password')->nullable();
-            $table->string('country')->nullable();
-
-            // $table->string('username_hash')->nullable();
-            // $table->string('email_hash')->unique()->nullable();
-
-            $table->timestamp('online_date')->nullable();
             $table->timestamps();
         });
     }

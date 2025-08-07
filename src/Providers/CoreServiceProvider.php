@@ -16,32 +16,32 @@ class CoreServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        // Views
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'core');
+        // // Views
+        // $this->loadViewsFrom(__DIR__.'/../resources/views', 'core');
 
-        // Vertalingen
-        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'core');
+        // // Vertalingen
+        // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'core');
 
-        // Config publishen
-        $this->publishes([
-            __DIR__.'/../config' => config_path('core'),
-        ], 'core-config');
+        // // Config publishen
+        // $this->publishes([
+        //     __DIR__.'/../config' => config_path('core'),
+        // ], 'core-config');
 
-        $this->publishes([
-            __DIR__.'/../resources/assets/css' => resource_path('core/css'),
-            __DIR__.'/../resources/assets/scss' => resource_path('core/scss'),
-            __DIR__.'/../resources/assets/js' => resource_path('core/js'),
-            __DIR__.'/../resources/assets/packages' => resource_path('core/packages'),
-            __DIR__.'/../resources/lang' => resource_path('core/lang'),
-            __DIR__.'/../resources/views' => resource_path('views/core'),
-        ], 'core-resources');
+        // $this->publishes([
+        //     __DIR__.'/../resources/assets/css' => resource_path('core/css'),
+        //     __DIR__.'/../resources/assets/scss' => resource_path('core/scss'),
+        //     __DIR__.'/../resources/assets/js' => resource_path('core/js'),
+        //     __DIR__.'/../resources/assets/packages' => resource_path('core/packages'),
+        //     __DIR__.'/../resources/lang' => resource_path('core/lang'),
+        //     __DIR__.'/../resources/views' => resource_path('views/core'),
+        // ], 'core-resources');
 
-        $this->publishes([
-            __DIR__.'/../routes' => base_path('routes/core'),
-        ], 'core-routes');
+        // $this->publishes([
+        //     __DIR__.'/../routes' => base_path('routes/core'),
+        // ], 'core-routes');
 
-        // Migrations
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        // // Migrations
+        // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
         // if ($this->app->environment('local')) {
         //     Artisan::call('vendor:publish', [

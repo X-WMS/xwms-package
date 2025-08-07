@@ -6,45 +6,12 @@ use Stevebauman\Location\Facades\Location;
 
 class IpService
 {
-    public static function getUserAgent(): string
+    public static function getIpData(): array
     {
-        return substr((string) ($_SERVER['HTTP_USER_AGENT'] ?? 'unknown'), 0, 500);
-    }
-
-    public static function getIpAddress(): string
-    {
-        if (isset($_SERVER['HTTP_CF_CONNECTING_IP'])) {
-            return $_SERVER['HTTP_CF_CONNECTING_IP'];
-        }
-
-        if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-            return explode(',', $_SERVER['HTTP_X_FORWARDED_FOR'])[0];
-        }
-
-        return $_SERVER['REMOTE_ADDR'] ?? '127.0.0.1';
-    }
-
-    public static function isLocal(string $ip): bool
-    {
-        if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
-            return
-                preg_match('/^(127\.|10\.|192\.168\.|172\.(1[6-9]|2[0-9]|3[0-1]))/', $ip) ||
-                $ip === '169.254.0.0';
-        }
-
-        if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
-            return in_array($ip, ['::1']) || str_starts_with($ip, 'fe80:') || str_starts_with($ip, 'fc00:');
-        }
-
-        return false;
-    }
-
-    public static function getIpAdr(string|null $ip = null): array
-    {
-        $ip = $ip ?: self::getIpAddress();
+        $ip = request()->ip();
         if (in_array($ip, ['127.0.0.1', '::1'])) {
             return [
-                'ipaddress' => '217.154.83.228',
+                'ipaddress' => '127.0.0.1',
                 'status' => 200,
                 'city' => 'NoMansCity',
                 'region' => 'NoMansLand',
@@ -63,7 +30,7 @@ class IpService
                 'status' => 206,
                 'city' => '',
                 'region' => '',
-                'countrycode' => '',
+                'countrycode' => 'NL',
                 'countryname' => '',
                 'btw' => null,
                 'lat' => '',
