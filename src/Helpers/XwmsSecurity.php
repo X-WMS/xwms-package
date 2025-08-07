@@ -29,7 +29,7 @@ class XwmsSecurity
             'data' => $data,
             'timestamp' => time(),
             'nonce' => Str::random(32),
-            'ip' => $ip ?? IpService::getIpAdr()['ipaddress'], // IP vastleggen
+            'ip' => $ip ?? IpService::getIpData()['ipaddress'], // IP vastleggen
         ];
 
         $stretchedKey = hash_pbkdf2('sha256', $key, $salt, 10000, 32, true);
@@ -83,7 +83,7 @@ class XwmsSecurity
 
         if ($checkIp) {
             $expectedIp = $payload['ip'] ?? null;
-            $actualIp = IpService::getIpAdr()['ipaddress'] ?? null;
+            $actualIp = IpService::getIpData()['ipaddress'] ?? null;
     
             $allowedProxies = [
                 self::$xwms_api, // intern VPN IP
@@ -133,7 +133,7 @@ class XwmsSecurity
 
     public static function sign(array $data, bool $includeIp = true): string
     {
-        return self::secureEncrypt($data, $includeIp ? IpService::getIpAdr()['ipaddress'] : null);
+        return self::secureEncrypt($data, $includeIp ? IpService::getIpData()['ipaddress'] : null);
     }
 
     public static function validateSigned(string $payload, int $maxAgeSeconds = 60, bool $checkIp = true): array

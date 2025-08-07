@@ -27,7 +27,7 @@ class LangController extends Controller
             $lang = $locale;
     
             if ($isDefault === true) {
-                $ipData = IpService::getIpAdr();
+                $ipData = IpService::getIpData();
                 $lang = strtolower($ipData['countrycode'] ?? config("xwms.locale.default", "en")); // Zet naar kleine letters
             }
         
