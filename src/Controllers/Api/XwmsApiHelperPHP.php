@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelShared\Core\Controllers\Api;
+namespace XWMS\Package\Core\Controllers\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;

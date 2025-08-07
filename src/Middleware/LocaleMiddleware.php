@@ -1,11 +1,11 @@
 <?php
 
-namespace LaravelShared\Core\Middleware;
+namespace XWMS\Package\Core\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use LaravelShared\Core\Controllers\LangController;
+use XWMS\Package\Core\Controllers\LangController;
 
 class LocaleMiddleware
 {

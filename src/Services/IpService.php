@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelShared\Core\Services;
+namespace XWMS\Package\Core\Services;
 
 use Stevebauman\Location\Facades\Location;
 

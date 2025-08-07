@@ -1,13 +1,13 @@
 <?php
 
-namespace LaravelShared\Core\Middleware;
+namespace XWMS\Package\Core\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
 
-use LaravelShared\Core\Services\MyService;
+use XWMS\Package\Core\Services\MyService;
 use App\Models\Visitor;
 use App\Models\User;
 

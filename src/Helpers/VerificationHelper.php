@@ -1,9 +1,9 @@
 <?php
 
-namespace LaravelShared\Core\Helpers;
+namespace XWMS\Package\Core\Helpers;
 
-use LaravelShared\Core\Models\CodeVerification;
-use LaravelShared\Core\Services\IpService;
+use XWMS\Package\Core\Models\CodeVerification;
+use XWMS\Package\Core\Services\IpService;
 use Exception;
 
 class VerificationHelper

@@ -1,8 +1,8 @@
 <?php
 
-namespace LaravelShared\Core\Helpers;
+namespace XWMS\Package\Core\Helpers;
 
-use LaravelShared\Core\Services\IpService;
+use XWMS\Package\Core\Services\IpService;
 use Illuminate\Support\Facades\RateLimiter;
 
 class RateLimit

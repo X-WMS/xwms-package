@@ -1,12 +1,12 @@
 <?php
 
-namespace LaravelShared\Core\Controllers;
+namespace XWMS\Package\Core\Controllers;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Http\Request;
 
-use LaravelShared\Core\Controllers\Controller;
-use LaravelShared\Core\Services\IpService;
+use XWMS\Package\Core\Controllers\Controller;
+use XWMS\Package\Core\Services\IpService;
 
 class LangController extends Controller
 {

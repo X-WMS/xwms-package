@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use LaravelShared\Core\Controllers\RedirectController;
+use XWMS\Package\Core\Controllers\RedirectController;
 
 // ------------------------------------------------------
 // --------- REDIRECTS

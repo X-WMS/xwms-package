@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelShared\Core\Middleware;
+namespace XWMS\Package\Core\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;

@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelShared\Core\Helpers;
+namespace XWMS\Package\Core\Helpers;
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception as MailException;

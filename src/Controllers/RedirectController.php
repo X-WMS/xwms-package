@@ -1,9 +1,9 @@
 <?php
 
-namespace LaravelShared\Core\Controllers;
+namespace XWMS\Package\Core\Controllers;
 
 use Illuminate\Http\Request;
-use LaravelShared\Core\Controllers\Controller;
+use XWMS\Package\Core\Controllers\Controller;
 
 // all xwms redirects
 

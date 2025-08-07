@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelShared\Core\Models;
+namespace XWMS\Package\Core\Models;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
