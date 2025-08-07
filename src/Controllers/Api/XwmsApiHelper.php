@@ -10,15 +10,16 @@ class XwmsApiHelper
     private static string $clientId;
     private static string $clientSecret;
     private static Client $httpClient;
-    private static string $baseUri = 'https://xwms.nl/api/';
-
+    private static string $baseUri;
+    private static string|null $redirectUri = null;
     public static function setup(): void
     {
+        self::$baseUri = config("xwms.xwms_api_url", env("XWMS_API_URI"));
         self::$clientId = config("xwms.client_id", env("XWMS_CLIENT_ID"));
         self::$clientSecret = config("xwms.client_secret", env("XWMS_CLIENT_SECRET"));
         self::$httpClient = new Client([
             'base_uri' => self::$baseUri,
-            'timeout'  => 10,
+            'timeout'  => config("xwms.xwms_api_timeout", 10),
         ]);
     }
 
@@ -51,16 +52,33 @@ class XwmsApiHelper
         }
     }
 
-    public static function authenticateUser(array $data = []): array
+    public static function authenticateUser(array $data = []): self
     {
         self::setup();
-        return self::postToEndpoint("sign-token", $data);
+        $response = (array) self::postToEndpoint("sign-token", $data);
+
+        $instance = new self();
+        if (isset($response['data']['url'])) {
+            self::$redirectUri = $response['data']['url'];
+        } elseif (isset($response['redirect_url'])) {
+            self::$redirectUri = $response['redirect_url'];
+        } else {
+            throw new Exception("Could not get redirect Api: ".json_encode($response)."");
+        }
+
+        return $instance;
     }
 
     public static function getAuthenticateUser(array $data = []): array
     {
         self::setup();
         $token = request('token');
-        return self::postToEndpoint("sign-token-verify", array_merge(['token' => $token], $data));
+        $response = (array) self::postToEndpoint("sign-token-verify", array_merge(['token' => $token], $data));
+        return $response;
+    }
+
+    public function redirect(): string|null
+    {
+        return self::$redirectUri;
     }
 }

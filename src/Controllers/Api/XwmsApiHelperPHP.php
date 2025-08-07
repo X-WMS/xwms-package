@@ -10,10 +10,12 @@ class XwmsApiHelperPHP
     private string $clientId;
     private string $clientSecret;
     private Client $httpClient;
-    private string $baseUri = 'https://xwms.nl/api/';
+    private string $baseUri;
+    private string|null $redirectUri = null;
 
-    public function __construct(string $clientId, string $clientSecret, ?Client $httpClient = null)
+    public function __construct(string $clientId, string $clientSecret, ?Client $httpClient = null, string $baseUri = "https://xwms.nl/api/")
     {
+        $this->baseUri = $baseUri;
         $this->clientId = $clientId;
         $this->clientSecret = $clientSecret;
 
@@ -48,13 +50,28 @@ class XwmsApiHelperPHP
         }
     }
 
-    public function authenticateUser(array $data = []): array
+    public function authenticateUser(array $data = []): self
     {
-        return $this->postToEndpoint("sign-token", $data);
+        $response = $this->postToEndpoint("sign-token", $data);
+
+        if (isset($response['data']['url'])) {
+            $this->redirectUri = $response['data']['url'];
+        } elseif (isset($response['redirect_url'])) {
+            $this->redirectUri = $response['redirect_url'];
+        } else {
+            throw new \Exception("Could not get redirect URL from API response: " . json_encode($response));
+        }
+
+        return $this;
     }
 
     public function getAuthenticateUser(string $token, array $data = []): array
     {
         return $this->postToEndpoint("sign-token-verify", array_merge(['token' => $token], $data));
+    }
+
+    public function redirect(): ?string
+    {
+        return $this->redirectUri;
     }
 }
