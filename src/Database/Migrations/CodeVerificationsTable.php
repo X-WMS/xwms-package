@@ -1,6 +1,6 @@
 <?php
 
-namespace XWMS\Package\Core\Database\Migrations;
+namespace XWMS\Package\Database\Migrations;
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;

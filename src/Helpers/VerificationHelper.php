@@ -1,9 +1,9 @@
 <?php
 
-namespace XWMS\Package\Core\Helpers;
+namespace XWMS\Package\Helpers;
 
-use XWMS\Package\Core\Models\CodeVerification;
-use XWMS\Package\Core\Services\IpService;
+use XWMS\Package\Models\CodeVerification;
+use XWMS\Package\Services\IpService;
 use Exception;
 
 class VerificationHelper

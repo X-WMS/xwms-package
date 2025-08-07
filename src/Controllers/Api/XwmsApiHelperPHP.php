@@ -1,6 +1,6 @@
 <?php
 
-namespace XWMS\Package\Core\Controllers\Api;
+namespace XWMS\Package\Controllers\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;

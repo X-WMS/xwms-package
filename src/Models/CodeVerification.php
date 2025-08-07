@@ -1,6 +1,6 @@
 <?php
 
-namespace XWMS\Package\Core\Models;
+namespace XWMS\Package\Models;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;

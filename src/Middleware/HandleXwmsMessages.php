@@ -1,6 +1,6 @@
 <?php
 
-namespace XWMS\Package\Core\Middleware;
+namespace XWMS\Package\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;

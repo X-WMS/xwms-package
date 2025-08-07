@@ -1,6 +1,6 @@
 <?php
 
-namespace XWMS\Package\Core\Traits;
+namespace XWMS\Package\Traits;
 
 use Illuminate\Support\Str;
 

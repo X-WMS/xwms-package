@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use XWMS\Package\Core\Controllers\LangController;
+use XWMS\Package\Controllers\LangController;
 
 // ------------------------------------------------------
 // --------- LANG

@@ -1,13 +1,13 @@
 <?php
 
-namespace XWMS\Package\Core\Middleware;
+namespace XWMS\Package\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
 
-use XWMS\Package\Core\Services\MyService;
+use XWMS\Package\Services\MyService;
 use App\Models\Visitor;
 use App\Models\User;
 

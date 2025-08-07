@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelShared\Core\Providers;
+namespace XWMS\Package\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Artisan;

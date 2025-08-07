@@ -1,12 +1,12 @@
 <?php
 
-namespace XWMS\Package\Core\Controllers;
+namespace XWMS\Package\Controllers;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Http\Request;
 
-use XWMS\Package\Core\Controllers\Controller;
-use XWMS\Package\Core\Services\IpService;
+use XWMS\Package\Controllers\Controller;
+use XWMS\Package\Services\IpService;
 
 class LangController extends Controller
 {

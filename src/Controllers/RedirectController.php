@@ -1,9 +1,9 @@
 <?php
 
-namespace XWMS\Package\Core\Controllers;
+namespace XWMS\Package\Controllers;
 
 use Illuminate\Http\Request;
-use XWMS\Package\Core\Controllers\Controller;
+use XWMS\Package\Controllers\Controller;
 
 // all xwms redirects
 

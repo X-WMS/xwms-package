@@ -1,6 +1,6 @@
 <?php
 
-namespace XWMS\Package\Core\Services;
+namespace XWMS\Package\Services;
 
 use Stevebauman\Location\Facades\Location;
 

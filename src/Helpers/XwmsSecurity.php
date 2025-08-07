@@ -1,11 +1,11 @@
 <?php
 
-namespace XWMS\Package\Core\Helpers;
+namespace XWMS\Package\Helpers;
 
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use XWMS\Package\Core\Services\IpService;
+use XWMS\Package\Services\IpService;
 use Exception;
 
 class XwmsSecurity

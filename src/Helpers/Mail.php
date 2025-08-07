@@ -1,6 +1,6 @@
 <?php
 
-namespace XWMS\Package\Core\Helpers;
+namespace XWMS\Package\Helpers;
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception as MailException;

@@ -1,6 +1,6 @@
 <?php
 
-namespace XWMS\Package\Core\Controllers;
+namespace XWMS\Package\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
