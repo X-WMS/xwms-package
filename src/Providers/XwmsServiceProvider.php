@@ -14,12 +14,10 @@ class XwmsServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        // Publiceer config bestand als het er nog niet is
         $this->publishes([
             __DIR__.'/../config/xwms.php' => config_path('xwms.php'),
-        ], 'xwms-config');
+        ], 'config');
 
-        // Als config/xwms.php al bestaat, vul ontbrekende keys aan
         $this->syncConfigKeys();
     }
 
