@@ -37,7 +37,7 @@ Step 2: Publish the config file
 php artisan vendor:publish --tag=xwms-config
 ```
 
-Step 3: Configure your .env file
+Step 3: Configure your `.env` file
 Add your XWMS credentials and settings to .env:
 
 ```bash
