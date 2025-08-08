@@ -57,7 +57,7 @@ use Illuminate\Support\Facades\Route;
 use XWMS\Package\Controllers\Api\XwmsApiHelper;
 
 // ------------------------------------------------------
-// --------- XWMS API
+// --------- XWMS LOGIN API
 // ------------------------------------------------------
 
 Route::get('/xwms/info', [XwmsApiHelper::class, 'info'])->name('xwms.api.info');
