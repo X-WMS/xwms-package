@@ -51,12 +51,19 @@ Step 4: Add XWMS API routes
 Add the following routes to `routes/web.php` or any other route file:
 
 ```bash
+<?php
+
 use Illuminate\Support\Facades\Route;
 use XWMS\Package\Controllers\Api\XwmsApiHelper;
 
-Route::get('/xwms/info', [XwmsApiHelper::class, 'info']);
-Route::get('/xwms/auth', [XwmsApiHelper::class, 'auth']);
-Route::get('/xwms/validateToken', [XwmsApiHelper::class, 'authValidate']);
+// ------------------------------------------------------
+// --------- XWMS API
+// ------------------------------------------------------
+
+Route::get('/xwms/info', [XwmsApiHelper::class, 'info'])->name('xwms.api.info');
+Route::get('/xwms/auth', [XwmsApiHelper::class, 'auth'])->name('xwms.api.auth');
+Route::get('/xwms/validateToken', [XwmsApiHelper::class, 'authValidate'])->name('xwms.api.validateToken');
+
 ```
 
 ✅ That’s it! You’re now ready to use the XWMS authentication APIs in your Laravel app.
