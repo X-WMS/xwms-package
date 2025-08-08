@@ -58,6 +58,9 @@ Route::get('/xwms/auth', [XwmsApiHelper::class, 'auth'])->name('xwms.api.auth');
 Route::get('/xwms/validateToken', [XwmsApiHelper::class, 'authValidate'])->name('xwms.api.validateToken');
 
 ```
+✅ That’s it! You’re now ready to use the XWMS authentication APIs in your Laravel app.
+
+
 
 
 ## Installation (ANY AI CHATBOT)
@@ -107,7 +110,10 @@ Use the following placeholder values:
 - token: `example-token-value`
 
 Output only the code in [your language], nothing else. If you need to set variables or install a package (like `axios` or `requests`), include it too.
+if the user did NOT replace [your programming language] please ask the user to provide an programming language first.
 ```
 
 ✅ That’s it! You’re now ready to use the XWMS authentication APIs in your Laravel app.
+
+
 
