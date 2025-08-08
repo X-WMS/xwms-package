@@ -9,14 +9,14 @@ class XwmsServiceProvider extends ServiceProvider
     public function register()
     {
         // Merge default config met bestaande config.
-        $this->mergeConfigFrom(__DIR__.'/../../config/xwms.php', 'xwms');
+        $this->mergeConfigFrom(__DIR__.'/../config', 'xwms');
     }
 
     public function boot()
     {
         // Publiceer config bestand als het er nog niet is
         $this->publishes([
-            __DIR__.'/../../config/xwms.php' => config_path('xwms.php'),
+            __DIR__.'/../config/xwms.php' => config_path('xwms.php'),
         ], 'xwms-config');
 
         // Als config/xwms.php al bestaat, vul ontbrekende keys aan
@@ -25,7 +25,7 @@ class XwmsServiceProvider extends ServiceProvider
 
     protected function syncConfigKeys()
     {
-        $defaultConfig = require __DIR__.'/../../config/xwms.php';
+        $defaultConfig = require __DIR__.'/../config/xwms.php';
         $userConfigPath = config_path('xwms.php');
 
         if (!file_exists($userConfigPath)) {
