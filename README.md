@@ -26,5 +26,5 @@ Compatible with frameworks like Laravel, Symfony, or plain PHP
 ## Installation
 
 ```bash
-composer require xwmsshared/core
+composer require xwms/package
 
