@@ -9,7 +9,7 @@ class XwmsServiceProvider extends ServiceProvider
     public function register()
     {
         // Merge default config met bestaande config.
-        $this->mergeConfigFrom(__DIR__.'/../config', 'xwms');
+        $this->mergeConfigFrom(__DIR__.'/../config/xwms.php', 'xwms');
     }
 
     public function boot()
