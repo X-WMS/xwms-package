@@ -38,7 +38,7 @@ php artisan vendor:publish --tag=xwms-config
 ```
 
 Step 3: Configure your `.env` file
-Add your XWMS credentials and settings to .env:
+Add your XWMS credentials and settings to `.env`:
 
 ```bash
 XWMS_CLIENT_ID="your_client_id"
@@ -48,7 +48,7 @@ XWMS_REDIRECT_URI="http://example.com/xwms/validateToken"
 ```
 
 Step 4: Add XWMS API routes
-Add the following routes to routes/web.php or routes/api.php:
+Add the following routes to `routes/web.php` or any other route file:
 
 ```bash
 use Illuminate\Support\Facades\Route;
