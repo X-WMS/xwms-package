@@ -1,5 +1,5 @@
 {
-  "name": "xwmsshared/core",
+  "name": "xwms/package",
   "description": "XWMS.nl provides secure, sophisticated, and custom-built login and authentication APIs for businesses. Our solutions ensure robust security, seamless integration with existing systems, and compliance with the highest industry standards. These are not simple APIs, but comprehensive identity management systems designed to deliver reliability and protection at enterprise scale.",
   "type": "library",
   "license": "MIT",
@@ -29,6 +29,13 @@
   "require": {
     "php": "^8.2",
     "laravel/framework": ">=11.0"
+  },
+  "extra": {
+      "laravel": {
+          "providers": [
+              "XWMS\\Package\\Providers\\XwmsServiceProvider"
+          ]
+      }
   },
   "suggest": {
     "barryvdh/laravel-dompdf": "PDF generatie",
