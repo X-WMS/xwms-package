@@ -147,4 +147,11 @@ class XwmsApiHelper
         self::setup();
         return (array) self::getFromEndpoint("info");
     }
+
+    public static function getUserAddress(string $email, array $data = []): array
+    {
+        self::setup();
+        $response = (array) self::postToEndpoint("get/user/address", array_merge(['email' => $email], $data));
+        return $response;
+    }
 }
