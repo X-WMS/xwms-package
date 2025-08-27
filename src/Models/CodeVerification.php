@@ -14,10 +14,6 @@ class CodeVerification extends Model
         'attempt', 'last_attempt', 'completed_at', 'expires_at',
     ];
 
-    protected $encryptedFields = [
-        'ip', 'email', 'status', 'category', 'code',
-    ];
-
     protected $casts = [
         'last_attempt' => 'datetime',
         'completed_at' => 'datetime',

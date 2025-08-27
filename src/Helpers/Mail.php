@@ -4,10 +4,11 @@ namespace XWMS\Package\Helpers;
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception as MailException;
+use Throwable;
 
 class Mail
 {
-    public static function send(string $to, array $data, array $options = []): bool
+    public static function send(string $to, array $data, array $options = []): PHPMailer
     {
         $mail = new PHPMailer(true);
 
@@ -32,8 +33,7 @@ class Mail
             $mail->Body = $html;
 
             $mail->send();
-            return true;
-
+            return $mail;
         } catch (MailException $e) {
             throw new \Exception("Mail error: {$mail->ErrorInfo}");
         }
@@ -50,12 +50,18 @@ class Mail
         ];
     }
 
-    public static function sendVerificationCode(string $email, string $code, string|array $options = []): bool
+    public static function sendVerificationCode(string $email, string $code, string|array $options = []): PHPMailer 
     {
-        $options = is_array($options) ? $options : ['username' => $options];
+        $options = is_array($options) ? $options : ['name' => $options];
         $data = array_merge([
             'template' => 'verification',
+
+            'name' => $options['name'] ?? false,
             'subject' => $options['subject'] ?? 'XWMS Verification Code',
+            'description_short' => $options['description_short'] ?? 'Your login attempt requires additional verification.',
+            'description' => $options['description'] ?? 'Use this code to complete your login. Do not share this code with anyone.',
+            'description_second' => $options['description_second'] ?? 'If you didn\'t request this code, please ignore this email. Your account is safe.',
+            'show_xwms' => $options['show_xwms'] ?? true,
             'verificationCode' => $code,
         ], $options);
 
@@ -76,7 +82,7 @@ class Mail
     protected static function setupRecipients(PHPMailer $mail, string $to, array $options): void
     {
         $from = $options['from_email'] ?? $mail->Username;
-        $name = $options['from_name'] ?? 'XWMS';
+        $name = $options['from_name'] ?? env("APP_NAME");
 
         $mail->setFrom($from, $name);
         $mail->addAddress($to);

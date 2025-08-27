@@ -20,12 +20,6 @@ class CodeVerificationsTable
             $table->text('email')->nullable();
             $table->integer('attempt')->default(1);
 
-            $table->string('ip_hash')->nullable();
-            $table->string('email_hash')->nullable();
-            $table->string('status_hash')->nullable();
-            $table->string('category_hash')->nullable();
-            $table->string('code_hash')->nullable();
-
             $table->timestamp('last_attempt')->nullable();
             $table->timestamp('completed_at')->nullable();
             $table->timestamp('expires_at')->nullable();
