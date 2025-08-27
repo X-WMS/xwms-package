@@ -14,8 +14,14 @@ class XwmsServiceProvider extends ServiceProvider
 
     public function boot()
     {
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'xwms');
+
         $this->publishes([
             __DIR__.'/../config/xwms.php' => config_path('xwms.php'),
         ], 'xwms-config');
+
+        $this->publishes([
+            __DIR__ . '/../resources/views' => resource_path('views/vendor/xwms'),
+        ], 'xwms-views');
     }
 }

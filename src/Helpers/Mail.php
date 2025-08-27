@@ -22,9 +22,10 @@ class Mail
             self::setupRecipients($mail, $to, $options);
 
             // 📩 HTML renderen
-            $view = $data['template'] ?? 'xwms-verification';
-            $view = "mail.".$view;
+            $template = $data['template'] ?? 'verification';
+            $view = "xwms::mail." . $template;
             $html = view($view, ['data' => $data])->render();
+
 
             $mail->isHTML(true);
             $mail->Subject = $data['subject'] ?? 'XWMS Mail';
@@ -53,7 +54,7 @@ class Mail
     {
         $options = is_array($options) ? $options : ['username' => $options];
         $data = array_merge([
-            'template' => 'xwms-verification',
+            'template' => 'verification',
             'subject' => $options['subject'] ?? 'XWMS Verification Code',
             'verificationCode' => $code,
         ], $options);
