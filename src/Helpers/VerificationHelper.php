@@ -3,18 +3,17 @@
 namespace XWMS\Package\Helpers;
 
 use XWMS\Package\Models\CodeVerification;
-use XWMS\Package\Services\IpService;
 use Exception;
 
 class VerificationHelper
 {
     protected static function getVerificationBase(int|string|null $userId = null): array
     {
-        $ipData = IpService::getIpAdr();
+        $ip = request()->ip();
 
         return [
             'user_id' => is_numeric($userId) ? $userId : null,
-            'ip' => $ipData['ipaddress'] ?? 'unknown',
+            'ip' => $ip ?? 'unknown',
         ];
     }
 

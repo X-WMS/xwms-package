@@ -5,7 +5,6 @@ namespace XWMS\Package\Helpers;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use XWMS\Package\Services\IpService;
 use Exception;
 
 class XwmsSecurity
@@ -29,7 +28,7 @@ class XwmsSecurity
             'data' => $data,
             'timestamp' => time(),
             'nonce' => Str::random(32),
-            'ip' => $ip ?? IpService::getIpData()['ipaddress'], // IP vastleggen
+            'ip' => $ip ?? request()->ip(), // IP vastleggen
         ];
 
         $stretchedKey = hash_pbkdf2('sha256', $key, $salt, 10000, 32, true);
@@ -83,10 +82,10 @@ class XwmsSecurity
 
         if ($checkIp) {
             $expectedIp = $payload['ip'] ?? null;
-            $actualIp = IpService::getIpData()['ipaddress'] ?? null;
+            $actualIp = request()->ip() ?? null;
     
             $allowedProxies = [
-                self::$xwms_api, // intern VPN IP
+                // self::$xwms_api, // intern VPN IP
                 $expectedIp,  // originele
             ];
     
@@ -133,7 +132,7 @@ class XwmsSecurity
 
     public static function sign(array $data, bool $includeIp = true): string
     {
-        return self::secureEncrypt($data, $includeIp ? IpService::getIpData()['ipaddress'] : null);
+        return self::secureEncrypt($data, $includeIp ? request()->ip() : null);
     }
 
     public static function validateSigned(string $payload, int $maxAgeSeconds = 60, bool $checkIp = true): array

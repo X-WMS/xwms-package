@@ -14,6 +14,11 @@ class UserMigration
             $table->string('name');
             $table->string('email');
             $table->string('password')->nullable();
+            $table->string('img')->nullable();
+
+            $table->foreignId('country_id')->nullable()->constrained('countries')->nullOnUpdate()->nullOnDelete();
+            $table->rememberToken()->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -89,15 +89,28 @@ class XWMSFilamentColumns
 
     private static function resolveBadgeColor(mixed $state, array $colors, string $falseColor): string
     {
+        // Als de waarde van $state voorkomt in de kleuren-array, gebruik dan die kleur
+        if (array_key_exists($state, $colors)) {
+            return $colors[$state];
+        }
+
+        // Als de waarde van $state gelijk is aan false, gebruik de fallbackkleur
         if ($state === false) {
             return $falseColor;
         }
 
+        // Anders, gebruik de defaultkleur voor de badge
         return $colors[$state] ?? 'primary';
     }
 
     private static function formatBadgeState(mixed $state, string $falseLabel): string
     {
         return $state === false ? $falseLabel : (string)$state;
+    }
+
+    public static function withDefaultValue($column, string $defaultValue)
+    {
+        $column->default(false);
+        return $column->formatStateUsing(fn ($state) => $state === false ? $defaultValue : (string)$state);
     }
 }

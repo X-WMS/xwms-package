@@ -5,13 +5,13 @@ namespace XWMS\Package\Database\Migrations;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 
-class CodeVerificationsTableV2
+class CodeVerificationsTable
 {
     public function up()
     {
         Schema::create('code_verifications', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('xwms_id')->index()->nullable();
+            $table->foreignId('user_id')->index()->nullable();
             $table->text('ip')->nullable();
             $table->text('category');
             $table->text('code');

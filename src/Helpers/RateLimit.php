@@ -2,15 +2,13 @@
 
 namespace XWMS\Package\Helpers;
 
-use XWMS\Package\Services\IpService;
 use Illuminate\Support\Facades\RateLimiter;
 
 class RateLimit
 {
     public static function checkRateLimit(string $key, int $cooldownSeconds, array $options = [])
     {
-        $ipData = IpService::getIpAdr();
-        $ip = $ipData['ipaddress'];
+        $ip = request()->ip();
         $sessionId = session()->getId();
         $throttleKey = $key . ':' . sha1($ip . '|' . $sessionId);
     
