@@ -13,5 +13,10 @@ return [
     ],
     "google" => [
         "MapsApiKey" => env('GOOGLE_MAPS_API_KEY', null)
+    ],
+    'models' => [
+        'Session' => \App\Models\Session::class,
+        'User' => \App\Models\User::class,
+        'CodeVerification' => \App\Models\CodeVerification::class,
     ]
 ];

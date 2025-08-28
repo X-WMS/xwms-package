@@ -28,16 +28,7 @@
   },
   "require": {
     "php": "^8.2",
-    "laravel/framework": ">=11.0"
-  },
-  "extra": {
-      "laravel": {
-          "providers": [
-              "XWMS\\Package\\Providers\\XwmsServiceProvider"
-          ]
-      }
-  },
-  "suggest": {
+    "laravel/framework": ">=11.0",
     "filament/filament": "^3.3",
     "laravel/fortify": "Authenticatie package",
     "laravel/sanctum": "Token-gebaseerde authenticatie",
@@ -51,6 +42,15 @@
     "socialiteproviders/google": "Google login provider",
     "socialiteproviders/manager": "Socialite extensie",
     "socialiteproviders/microsoft": "Microsoft login provider"
+  },
+  "extra": {
+      "laravel": {
+          "providers": [
+              "XWMS\\Package\\Providers\\XwmsServiceProvider"
+          ]
+      }
+  },
+  "suggest": {
   },
   "minimum-stability": "dev",
   "prefer-stable": true

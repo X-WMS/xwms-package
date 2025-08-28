@@ -5,7 +5,6 @@ namespace XWMS\Package\Filament;
 use XWMS\Package\Helpers\RateLimit;
 use XWMS\Package\Helpers\Mail;
 use XWMS\Package\Helpers\VerificationHelper;
-use App\Models\User;
 use Filament\Notifications\Notification;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,7 +12,7 @@ use XWMS\Package\Helpers\Filament AS FilamentHelper;
 
 class AccountEmail
 {
-    public static function verifyEmail($component, string $email, User $user)
+    public static function verifyEmail($component, string $email, $user)
     {
         $same = false;
 
@@ -30,7 +29,7 @@ class AccountEmail
 
         return true;
     }
-    public static function sendVerificationCode(User $user, string $category, string $email): void
+    public static function sendVerificationCode($user, string $category, string $email): void
     {
         RateLimit::checkRateLimit($category, 46, ['message' => 'before requesting a new code.']);
 
@@ -75,7 +74,9 @@ class AccountEmail
                 $component->addError($component->email_key, $invalidemailMessage ?? "Please enter a valid email address so we can reach you.");
             }
 
-            $user = User::find(Auth::id());
+            $userModel = config('xwms.models.User', \App\Models\User::class);
+            $user = $userModel::find(Auth::id());
+
             $check = self::verifyEmail($component, $newEmail, $user);
             if (!$check) return false;
 
@@ -120,7 +121,8 @@ class AccountEmail
                 code: $code
             );
 
-            $user = User::find(Auth::id());
+            $userModel = config('xwms.models.User', \App\Models\User::class);
+            $user = $userModel::find(Auth::id());
             $user->email = $newEmail;
             $user->save();
 

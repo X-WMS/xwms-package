@@ -2,7 +2,6 @@
 
 namespace XWMS\Package\Models;
 
-use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
 class CodeVerification extends Model
@@ -25,7 +24,7 @@ class CodeVerification extends Model
      */
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo( config('xwms.models.user', \App\Models\User::class));
     }
 
     /**
