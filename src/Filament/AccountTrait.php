@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Hash;
 
 trait AccountTrait
 {
-    private function accountGeneralDefaultGridTop($component): Forms\Components\Grid
+    protected function accountGeneralDefaultGridTop($component): Forms\Components\Grid
     {
         return Forms\Components\Grid::make(12)
         ->schema([
@@ -60,7 +60,7 @@ trait AccountTrait
         ]);
     }
 
-    private function accountGeneralDefaultGridBottom($component): Forms\Components\Grid
+    protected function accountGeneralDefaultGridBottom($component): Forms\Components\Grid
     {
         return Forms\Components\Grid::make()
         ->schema([
@@ -88,7 +88,7 @@ trait AccountTrait
         ->columns(2);
     }
 
-    private function accountGeneralDefaultGridExtended($component): \Filament\Forms\Components\Component
+    protected function accountGeneralDefaultGridExtended($component): \Filament\Forms\Components\Component
     {
         return \Filament\Forms\Components\Group::make([])->visible(false);
     }
@@ -102,7 +102,7 @@ trait AccountTrait
         ])->columns(1);
     }
 
-    private function accountForm($component, Form $form): Form
+    protected function accountForm($component, Form $form): Form
     {
         return $form
             ->schema([
@@ -115,7 +115,7 @@ trait AccountTrait
 
 
 
-    private function accountSecurityChangeEmail($component): Forms\Components\Section
+    protected function accountSecurityChangeEmail($component): Forms\Components\Section
     {
         return Forms\Components\Section::make('Change Email Address')
         ->description('Update your email address. A confirmation code will be sent to your new address.')
@@ -223,7 +223,7 @@ trait AccountTrait
     }
 
 
-    private function accountSecurityChangePassword($component): Forms\Components\Section
+    protected function accountSecurityChangePassword($component): Forms\Components\Section
     {
         return Forms\Components\Section::make('Change Password')
         ->description('Update your account password securely. Make sure your new password is strong and unique.')
@@ -254,7 +254,7 @@ trait AccountTrait
         ->columns(2);
     }
 
-    private function accountSecurityExtended($component): \Filament\Forms\Components\Component
+    protected function accountSecurityExtended($component): \Filament\Forms\Components\Component
     {
         return \Filament\Forms\Components\Group::make([])->visible(false);
     }
