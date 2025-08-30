@@ -93,7 +93,7 @@ trait AccountTrait
         return \Filament\Forms\Components\Group::make([])->visible(false);
     }
 
-    private function accountGeneralDefaultSection($component): Forms\Components\Section
+    protected function accountGeneralDefaultSection($component): Forms\Components\Section
     {
         return Forms\Components\Section::make("General Account information")->schema([
             $this->accountGeneralDefaultGridTop($component),
@@ -259,7 +259,7 @@ trait AccountTrait
         return \Filament\Forms\Components\Group::make([])->visible(false);
     }
     
-    private function accountSecuritySection($component): Forms\Components\Section
+    protected function accountSecuritySection($component): Forms\Components\Section
     {
         return Forms\Components\Section::make('Security Settings')
         ->schema([
