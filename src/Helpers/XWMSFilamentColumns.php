@@ -7,14 +7,14 @@ use Carbon\Carbon;
 
 class XWMSFilamentColumns
 {
-    public static function expiresAt(string $name = 'expires_at'): TextColumn
+    public static function expiresAt(string $name = 'expires_at', string $label = "Expires At",string $falseLabel = "Infinite",string $falseColor = "success",string $trueColor = "warning",): TextColumn
     {
         return static::date(
             $name,
-            label: 'Expires At',
-            falseLabel: 'Infinite',
-            falseColor: 'success',
-            trueColor: 'warning',
+            label: $label,
+            falseLabel: $falseLabel,
+            falseColor: $falseColor,
+            trueColor: $trueColor,
         );
     }
 
