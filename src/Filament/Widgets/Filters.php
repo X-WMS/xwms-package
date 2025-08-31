@@ -108,7 +108,8 @@ class Filters
         $query,
         string $key,
         ?callable $normalizeLabelCallback = null,
-        ?callable $modifyQueryCallback = null
+        ?callable $modifyQueryCallback = null,
+        ?int $limit = 20
     ): array {
         ['start' => $start, 'end' => $end, 'dateFormat' => $dateFormat] = self::resolveDateFilter($class->filterFormData ?? []);
 
@@ -122,8 +123,13 @@ class Filters
 
         $data = $query
             ->groupBy('period', $key)
-            ->orderBy('period')
-            ->get();
+            ->orderBy('period');
+
+        if ($limit !== null) {
+            $query->limit($limit);
+        }
+        
+        $data = $query->get();
 
         $categories = $data->pluck('period')->unique()->values()->all();
         $grouped = [];
@@ -216,7 +222,8 @@ class Filters
         string $labelColumn,
         string $chartTitle = '',
         ?array $colors = null,
-        ?string $countExpression = 'COUNT(DISTINCT session_id)' // je kan dit aanpassen indien nodig
+        ?string $countExpression = 'COUNT(DISTINCT session_id)',
+        int $limit = 5
     ): array {
         ['start' => $start, 'end' => $end] = self::resolveDateFilter($filterFormData);
 
@@ -225,6 +232,7 @@ class Filters
             ->whereBetween('created_at', [$start, $end])
             ->groupBy($labelColumn)
             ->orderByDesc('count')
+            ->limit($limit)
             ->get();
 
         $labels = $results->pluck($labelColumn)->toArray();
