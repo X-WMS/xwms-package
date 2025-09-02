@@ -10,15 +10,17 @@ class XwmsApiHelperPHP
 {
     private string|null  $clientId = null;
     private string|null  $clientSecret = null;
+    private string|null $clientDomain = null;
     private Client $httpClient;
     private string|null  $baseUri = null;
     private string|null $redirectUri = null;
 
-    public function __construct(string $clientId, string $clientSecret, ?Client $httpClient = null, string $baseUri = "https://xwms.nl/api/")
+    public function __construct(string $clientId, string $clientSecret, ?Client $httpClient = null, ?string $clientDomain = null, string $baseUri = "https://xwms.nl/api/")
     {
-        $this->baseUri = $baseUri;
+        $this->baseUri = $baseUri ?? "https://xwms.nl/api/";
         $this->clientId = $clientId;
         $this->clientSecret = $clientSecret;
+        $this->clientDomain = $clientDomain ?? ($_SERVER['HTTP_HOST'] ?? getenv('XWMS_DOMAIN') ?? null);
 
         $this->httpClient = $httpClient ?: new Client([
             'base_uri' => $this->baseUri,
@@ -37,6 +39,7 @@ class XwmsApiHelperPHP
                 'headers' => [
                     'X-Client-Id' => $this->clientId,
                     'X-Client-Secret' => $this->clientSecret,
+                    'X-Client-Domain' => $this->clientDomain,
                     'Accept' => 'application/json',
                 ],
                 'json' => $payload,

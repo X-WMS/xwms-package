@@ -11,6 +11,7 @@ class XwmsApiHelper
 {
     private static string|null $clientId = null;
     private static string|null $clientSecret = null;
+    private static string|null $clientDomain = null;
     private static Client $httpClient;
     private static string|null $baseUri = null;
     private static string|null $redirectUri = null;
@@ -19,6 +20,7 @@ class XwmsApiHelper
         self::$baseUri = config("xwms.xwms_api_url", env("XWMS_API_URI", "https://xwms.nl/api/"));
         self::$clientId = config("xwms.client_id", env("XWMS_CLIENT_ID"));
         self::$clientSecret = config("xwms.client_secret", env("XWMS_CLIENT_SECRET"));
+        self::$clientDomain = request()?->getHost() ?? config("xwms.client_domain", env("XWMS_DOMAIN"));
 
         self::$httpClient = new Client([
             'base_uri' => self::$baseUri,
@@ -39,6 +41,7 @@ class XwmsApiHelper
                 $headers = $options['headers'] ?? [
                     'X-Client-Id'     => self::$clientId,
                     'X-Client-Secret' => self::$clientSecret,
+                    'X-Client-Domain' => self::$clientDomain,
                     'Accept'          => 'application/json',
                 ];
             }
@@ -75,6 +78,7 @@ class XwmsApiHelper
                 $headers = $options['headers'] ?? [
                     'X-Client-Id'     => self::$clientId,
                     'X-Client-Secret' => self::$clientSecret,
+                    'X-Client-Domain' => self::$clientDomain,
                     'Accept'          => 'application/json',
                 ];
             }
