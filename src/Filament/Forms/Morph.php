@@ -5,9 +5,44 @@ namespace XWMS\Package\Filament\Forms;
 use Closure;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\TextInput;
 
 class Morph
 {
+    public static function json(
+        string $fieldName = 'payload',
+        string $label = 'Payload',
+        string $description = 'Optionele extra data voor deze assignment. Wordt opgeslagen als JSON.',
+        array $default = [],
+    ): Repeater {
+        return Repeater::make($fieldName)
+            ->label($label)
+            ->helperText($description)
+            ->columns(2)
+            ->columnSpanFull()
+            ->afterStateHydrated(function (Repeater $component, $state) {
+                if (is_string($state)) {
+                    $decoded = json_decode($state, true);
+                    $component->state($decoded ?? []);
+                }
+            })
+            ->dehydrateStateUsing(function ($state) {
+                return json_encode($state);
+            })
+            ->schema([
+                TextInput::make('key')
+                    ->label('Key')
+                    ->required(),
+
+                TextInput::make('value')
+                    ->label('Value')
+                    ->required(),
+            ])
+            ->default($default);
+    }
+
+
     public static function dynamic(
         string $typeField = 'owner_type',
         string $idField = 'owner_id',
