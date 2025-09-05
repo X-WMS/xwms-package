@@ -39,7 +39,7 @@ In deze tutorial leggen we uit hoe je een nieuwe website toevoegt aan je Strato-
 
            ErrorLog ${APACHE_LOG_DIR}/websitedomain_error.log
            CustomLog ${APACHE_LOG_DIR}/websitedomain_access.log combined
-       </VirtualHost>```
+       </VirtualHost>
 
 4. Sla het bestand op en sluit de editor.
 
