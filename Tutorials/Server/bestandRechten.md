@@ -14,9 +14,9 @@ Wanneer je een webproject beheert op een Linux-server, zoals een Laravel-applica
 
 ## 2. Groep aanmaken
 
-Maak eerst een nieuwe groep aan, bijvoorbeeld `mailfigroup`:
+Maak eerst een nieuwe groep aan, bijvoorbeeld `webgroup`:
 
-    sudo groupadd mailfigroup
+    sudo groupadd webgroup
 
 ---
 
@@ -24,8 +24,8 @@ Maak eerst een nieuwe groep aan, bijvoorbeeld `mailfigroup`:
 
 Voeg de webservergebruiker (`www-data`) en jouw eigen gebruiker toe aan deze groep:
 
-    sudo usermod -aG mailfigroup www-data
-    sudo usermod -aG mailfigroup jouwgebruikersnaam
+    sudo usermod -aG webgroup www-data
+    sudo usermod -aG webgroup jouwgebruikersnaam
 
 > **Tip:** Vervang `jouwgebruikersnaam` door je eigen gebruikersnaam op de server.
 
@@ -33,16 +33,16 @@ Voeg de webservergebruiker (`www-data`) en jouw eigen gebruiker toe aan deze gro
 
 ## 4. Rechten toewijzen aan mappen en bestanden
 
-Stel nu de juiste rechten in op je projectmap (`/var/www/mailfi.io`):
+Stel nu de juiste rechten in op je projectmap (bijvoorbeeld `/var/www/yourproject`):
 
 - Geef lees-, schrijf- en uitvoerrechten aan de eigenaar en groep (775) voor mappen.  
 - Geef lees- en schrijf-rechten (664) aan bestanden voor eigenaar en groep.
 
 Voer de volgende commando's uit:
 
-    sudo chmod -R 775 /var/www/mailfi.io
-    sudo find /var/www/mailfi.io -type f -exec chmod 664 {} \;
-    sudo find /var/www/mailfi.io -type d -exec chmod 775 {} \;
+    sudo chmod -R 775 /var/www/yourproject
+    sudo find /var/www/yourproject -type f -exec chmod 664 {} \;
+    sudo find /var/www/yourproject -type d -exec chmod 775 {} \;
 
 ---
 
@@ -50,15 +50,15 @@ Voer de volgende commando's uit:
 
 Door de `setgid` bit op mappen te zetten, erven nieuwe bestanden en mappen automatisch de groep van de bovenliggende map:
 
-    sudo chmod g+s /var/www/mailfi.io
+    sudo chmod g+s /var/www/yourproject
 
 ---
 
 ## 6. Eigenaar en groep van de bestanden aanpassen
 
-Zorg dat de eigenaar de juiste gebruiker is (bijvoorbeeld `mailfi`) en de groep `mailfigroup`:
+Zorg dat de eigenaar de juiste gebruiker is (bijvoorbeeld `yourusername`) en de groep `webgroup`:
 
-    sudo chown -R mailfi:mailfigroup /var/www/mailfi.io
+    sudo chown -R yourusername:webgroup /var/www/yourproject
 
 ---
 
@@ -66,19 +66,19 @@ Zorg dat de eigenaar de juiste gebruiker is (bijvoorbeeld `mailfi`) en de groep 
 
 Geef de groep lees- en schrijfrechten op alle bestanden en mappen:
 
-    sudo chmod -R g+rw /var/www/mailfi.io
+    sudo chmod -R g+rw /var/www/yourproject
 
 ---
 
 ## 8. Controleer of het is gelukt
 
-Log in als de gebruiker (`mailfi` of jouw eigen gebruiker) en controleer de rechten:
+Log in als de gebruiker (`yourusername`) en controleer de rechten:
 
-    ls -l /var/www/mailfi.io/composer.json
+    ls -l /var/www/yourproject/composer.json
 
 Je zou iets moeten zien als:
 
-    -rw-rw-r-- 1 mailfi mailfigroup 12345 Sep 5 12:00 composer.json
+    -rw-rw-r-- 1 yourusername webgroup 12345 Sep 5 12:00 composer.json
 
 Dit betekent dat eigenaar en groep lees- en schrijfrechten hebben.
 
@@ -92,16 +92,16 @@ Bij wijzigingen of nieuwe bestanden is het soms nodig om deze stappen te herhale
 
 ## Samenvatting van commando's
 
-    sudo groupadd mailfigroup
-    sudo usermod -aG mailfigroup www-data
-    sudo usermod -aG mailfigroup jouwgebruikersnaam
+    sudo groupadd webgroup
+    sudo usermod -aG webgroup www-data
+    sudo usermod -aG webgroup jouwgebruikersnaam
 
-    sudo chmod -R 775 /var/www/mailfi.io
-    sudo find /var/www/mailfi.io -type f -exec chmod 664 {} \;
-    sudo find /var/www/mailfi.io -type d -exec chmod 775 {} \;
-    sudo chmod g+s /var/www/mailfi.io
-    sudo chown -R mailfi:mailfigroup /var/www/mailfi.io
-    sudo chmod -R g+rw /var/www/mailfi.io
+    sudo chmod -R 775 /var/www/yourproject
+    sudo find /var/www/yourproject -type f -exec chmod 664 {} \;
+    sudo find /var/www/yourproject -type d -exec chmod 775 {} \;
+    sudo chmod g+s /var/www/yourproject
+    sudo chown -R yourusername:webgroup /var/www/yourproject
+    sudo chmod -R g+rw /var/www/yourproject
 
 ---
 
