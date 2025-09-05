@@ -18,7 +18,7 @@ In deze tutorial leggen we uit hoe je een nieuwe website toevoegt aan je Strato-
 
 1. Maak een nieuwe configuratie aan voor je website:
 
-   ```
+   ```bash
    sudo nano /etc/apache2/sites-available/websitedomain.conf
    ```
 
@@ -52,22 +52,26 @@ In deze tutorial leggen we uit hoe je een nieuwe website toevoegt aan je Strato-
 
    ```
    sudo a2ensite websitedomain.conf
+   ```
 
 2. Herlaad Apache om de wijzigingen door te voeren:
 
    ```
    sudo systemctl reload apache2
+   ```
 
 3. Om een website tijdelijk uit te schakelen:
 
    ```
    sudo a2dissite websitedomain.conf  
    sudo systemctl reload apache2
+   ```
 
 4. Bekijk de status van Apache:
 
    ```
    sudo systemctl status apache2
+   ```
 
 ---
 
@@ -79,6 +83,7 @@ Als Certbot en het Certbot Apache plugin al geïnstalleerd zijn, kun je HTTPS ee
 
    ```
    sudo certbot --apache -d websitedomain -d www.websitedomain
+   ```
 
 2. Volg de instructies op het scherm, bijvoorbeeld:  
    - Vul je e-mailadres in voor belangrijke meldingen  
@@ -115,16 +120,19 @@ Zorg dat Apache toegang heeft tot de juiste mappen, vooral bij Laravel-projecten
 
    ```
    sudo systemctl status apache2
+   ```
 
 - Certbot certificaten bekijken:
 
    ```
    sudo certbot certificates
+   ```
 
 - Firewall status controleren (optioneel):
 
    ```
    sudo ufw status
+   ```
 
 ---
 
@@ -135,11 +143,13 @@ Zorg dat Apache toegang heeft tot de juiste mappen, vooral bij Laravel-projecten
 
    ```
    sudo apache2ctl configtest
+   ```
 
 - Herstart Apache bij twijfel:
 
    ```
    sudo systemctl restart apache2
+   ```
 
 ---
 
@@ -154,52 +164,64 @@ Hieronder een lijst met veelgebruikte commando's om je websites en Apache-config
 - **Apache configuratie openen voor een specifieke site:**  
   ```
   sudo nano /etc/apache2/sites-available/websitedomain.conf
+  ```
 
 - **HTTPS-configuratie voor een site bekijken:**  
   ```
   sudo nano /etc/apache2/sites-available/websitedomain-le-ssl.conf
+  ```
 
 - **Alle beschikbare websites (sites-available) bekijken:**  
   ```
   ls -l /etc/apache2/sites-available/
+  ```
 
 - **Alle geactiveerde websites (sites-enabled) bekijken:**  
   ```
   ls -l /etc/apache2/sites-enabled/
+  ```
 
 - **Apache configuratie testen op fouten:**  
   ```
   sudo apache2ctl configtest
+  ```
 
 - **Apache herstarten (verplicht na config wijzigingen):**  
   ```
   sudo systemctl restart apache2
+  ```
 
 - **Apache herladen (voor minder ingrijpende wijzigingen):**  
   ```
   sudo systemctl reload apache2
+  ```
 
 - **Status van Apache controleren:**  
   ```
   sudo systemctl status apache2
+  ```
 
 - **Certbot certificaten tonen:**  
   ```
   sudo certbot certificates
+  ```
 
 - **Firewall status bekijken:**  
   ```
   sudo ufw status
+  ```
 
 - **Firewall poorten toevoegen voor HTTP en HTTPS (indien nodig):**  
   ```
   sudo ufw allow 80/tcp  
   sudo ufw allow 443/tcp
+  ```
 
 - **Logs bekijken van een specifieke website:**  
   ```
   tail -f /var/log/apache2/websitedomain_access.log  
   tail -f /var/log/apache2/websitedomain_error.log
+  ```
 
 ---
 
