@@ -24,7 +24,7 @@ In deze tutorial leggen we uit hoe je een nieuwe website toevoegt aan je Strato-
 
 2. Voeg de volgende configuratie toe (vervang `websitedomain` door je eigen domeinnaam):
 
-       ```<VirtualHost *:80>
+       <VirtualHost *:80>
            ServerAdmin webmaster@websitedomain
            ServerName websitedomain
            ServerAlias www.websitedomain
