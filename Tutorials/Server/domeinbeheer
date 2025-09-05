@@ -18,7 +18,9 @@ In deze tutorial leggen we uit hoe je een nieuwe website toevoegt aan je Strato-
 
 1. Maak een nieuwe configuratie aan voor je website:
 
+   ```
    sudo nano /etc/apache2/sites-available/websitedomain.conf
+   ```
 
 2. Voeg de volgende configuratie toe (vervang `websitedomain` door je eigen domeinnaam):
 
