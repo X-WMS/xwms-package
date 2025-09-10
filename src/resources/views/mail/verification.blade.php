@@ -61,9 +61,6 @@
                             <td align="center" style="padding-top: 20px;">
                                 <img src="https://i.ibb.co/9mvDQj19/xwms-logo.png" width="30" alt="XWMS Logo">
                             </td>
-                            <td align="center" style="padding-top: 20px;">
-                                Powered by xwms
-                            </td>
                         </tr>
                     @endif
                 </table>
