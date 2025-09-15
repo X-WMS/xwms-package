@@ -232,8 +232,6 @@ ssh -i "[pad/naar/jouw/ssh-sleutel]" root@[jouw-server-ip]
 
 8. Als inloggen in MySQL niet lukt, kun je het wachtwoord resetten:  
    ```
-   sudo systemctl stop mysql  
-   sudo mysqld_safe --skip-grant-tables &  
    mysql -u root
    ```  
 
