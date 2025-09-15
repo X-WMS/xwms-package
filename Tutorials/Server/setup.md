@@ -322,7 +322,7 @@ ssh -i "[pad/naar/jouw/ssh-sleutel]" root@[jouw-server-ip]
    npm run build
    ```  
 
-6. Laravel setup uitvoeren:  
+6. Laravel setup uitvoeren (zorg ervoor dat je de .env hebt geregeld):  
    ```
    php artisan key:generate  
    php artisan migrate --seed  
