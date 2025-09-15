@@ -235,25 +235,11 @@ ssh -i "[pad/naar/jouw/ssh-sleutel]" root@[jouw-server-ip]
    mysql -u root
    ```  
 
-   - Als je een socket error krijgt:  
-     ```
-     sudo mkdir -p /var/run/mysqld  
-     sudo chown mysql:mysql /var/run/mysqld  
-     sudo mysqld_safe --skip-grant-tables &  
-     mysql -u root
-     ```  
-
    - Binnen MySQL console voer je uit:  
      ```
      USE mysql;  
      ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'nieuw_wachtwoord';  
      FLUSH PRIVILEGES;
-     ```  
-
-   - Daarna:  
-     ```
-     sudo killall mysqld  
-     sudo systemctl start mysql
      ```  
 
    - Test het met:  
