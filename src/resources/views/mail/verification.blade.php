@@ -20,7 +20,7 @@
                     <!-- Titel -->
                     <tr>
                         <td align="center" style="color: #ffffff; font-size: 24px; font-weight: bold;">
-                            🔒 {{ $data['subject'] }}
+                            {{ $data['subject'] }}
                         </td>
                     </tr>
 
