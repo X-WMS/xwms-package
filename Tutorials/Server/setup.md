@@ -232,30 +232,14 @@ ssh -i "[pad/naar/jouw/ssh-sleutel]" root@[jouw-server-ip]
 
 8. Als inloggen in MySQL niet lukt, kun je het wachtwoord resetten:  
    ```
-   sudo systemctl stop mysql  
-   sudo mysqld_safe --skip-grant-tables &  
    mysql -u root
    ```  
-
-   - Als je een socket error krijgt:  
-     ```
-     sudo mkdir -p /var/run/mysqld  
-     sudo chown mysql:mysql /var/run/mysqld  
-     sudo mysqld_safe --skip-grant-tables &  
-     mysql -u root
-     ```  
 
    - Binnen MySQL console voer je uit:  
      ```
      USE mysql;  
      ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'nieuw_wachtwoord';  
      FLUSH PRIVILEGES;
-     ```  
-
-   - Daarna:  
-     ```
-     sudo killall mysqld  
-     sudo systemctl start mysql
      ```  
 
    - Test het met:  
@@ -338,7 +322,7 @@ ssh -i "[pad/naar/jouw/ssh-sleutel]" root@[jouw-server-ip]
    npm run build
    ```  
 
-6. Laravel setup uitvoeren:  
+6. Laravel setup uitvoeren (zorg ervoor dat je de .env hebt geregeld):  
    ```
    php artisan key:generate  
    php artisan migrate --seed  
@@ -347,9 +331,11 @@ ssh -i "[pad/naar/jouw/ssh-sleutel]" root@[jouw-server-ip]
 
 7. Website configureren in Apache:  
    ```
-   sudo nano /etc/apache2/sites-available/websitedomain.conf  
+   sudo nano /etc/apache2/sites-available/websitedomain.conf
+   ```
 
    Voeg de volgende configuratie toe (pas `websitedomain` aan naar jouw domein):
+   ```
 
        <VirtualHost *:80>
            ServerAdmin webmaster@websitedomain
@@ -369,13 +355,13 @@ ssh -i "[pad/naar/jouw/ssh-sleutel]" root@[jouw-server-ip]
        </VirtualHost>
     ```
 
-8. Site activeren en Apache herladen:  
+9. Site activeren en Apache herladen:  
    ```
    sudo a2ensite websitedomain.conf  
    sudo systemctl reload apache2
    ```  
 
-9. HTTPS instellen met Certbot:  
+10. HTTPS instellen met Certbot:  
    - Installeer Certbot als je dat nog niet hebt:  
      ```
      sudo apt install certbot python3-certbot-apache
@@ -400,7 +386,7 @@ ssh -i "[pad/naar/jouw/ssh-sleutel]" root@[jouw-server-ip]
      - Kies **Yes** voor voorwaarden accepteren  
      - Kies **No** voor aanmelden nieuwsbrief  
 
-10. Permissions goed zetten voor Laravel cache en storage:  
+11. Permissions goed zetten voor Laravel cache en storage:  
     ```
     sudo chown -R www-data:www-data /var/www/websitedomain/storage  
     sudo chown -R www-data:www-data /var/www/websitedomain/bootstrap/cache  
@@ -408,7 +394,7 @@ ssh -i "[pad/naar/jouw/ssh-sleutel]" root@[jouw-server-ip]
     sudo chmod -R 775 /var/www/websitedomain/bootstrap/cache
     ```  
 
-11. Apache herstarten:  
+12. Apache herstarten:  
     ```
     sudo systemctl restart apache2
     ```  

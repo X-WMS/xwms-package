@@ -160,6 +160,11 @@ Je website zou nu volledig online en beveiligd via HTTPS moeten draaien. Voor ve
 
 Hieronder een lijst met veelgebruikte commando's om je websites en Apache-configuraties snel te beheren:
 
+- **Zie alle webistes:**  
+  ```
+  sudo apachectl -S
+  ```
+  
 - **Apache configuratie openen voor een specifieke site:**  
   ```
   sudo nano /etc/apache2/sites-available/websitedomain.conf

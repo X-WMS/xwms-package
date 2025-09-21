@@ -67,11 +67,13 @@ Gebruik SSH om het project te klonen (pas de URL aan naar jouw repository):
 
 Zorg dat de juiste gebruiker eigenaar is van de map:
 
-    sudo chown -R yourusername:www-data /var/www/yourproject
-
-En geef de juiste bestandsrechten:
-
-    sudo chmod -R 775 /var/www/yourproject
+sudo chmod -R 775 /var/www/domain  
+sudo find /var/www/domain -type f -exec chmod 664 {} \;  
+sudo find /var/www/domain -type d -exec chmod 775 {} \;  
+sudo chmod g+s /var/www/domain 
+sudo chown -R xwmsdev:group /var/www/domain 
+sudo chmod -R g+rw /var/www/domain  
+sudo chmod -R g+s /var/www/domain
 
 ---
 
